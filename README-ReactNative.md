@@ -4,11 +4,20 @@ This project was bootstrapped with [React-Native-CLI](https://github.com/faceboo
 
 Below you'll find information about performing common tasks. The most recent version of this guide is available [here](https://facebook.github.io/react-native/docs/getting-started.html).
 
-## APK link
-You can download the generated apk [here](https://github.com/smohamedjavid/react-native-paypal/releases)
+## Repository and APK links
 
+Blessy Samuel:
 
-## [Repository Link](https://github.com/smohamedjavid/react-native-paypal)
+[Repository](https://github.com/BlessySamuel/Bles)
+
+[Apk](https://github.com/BlessySamuel/Bles/releases)
+
+Mohamed Javid:
+
+[Repository](https://github.com/smohamedjavid/react-native-paypal)
+
+[Apk](https://github.com/smohamedjavid/react-native-paypal/releases)
+
 
 ## Installation
 
