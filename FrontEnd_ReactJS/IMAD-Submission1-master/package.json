@@ -1,0 +1,22 @@
+{
+  "name": "paypall",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "material-ui": "^0.20.0",
+    "paypal-checkout": "^4.0.173",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+<<<<<<< HEAD
+    "react-router-dom": "^4.2.2",
+=======
+>>>>>>> 75e3b8cfd2af8b4dea268cb3c6cc19a28b1ba3c9
+    "react-scripts": "1.1.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

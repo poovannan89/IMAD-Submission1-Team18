@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css" media="screen" title="no title" charset="utf-8">
+    <title>Python Flask</title>    
+    {% if title %}
+    <title>{{ title }} - HPDF Tasks</title>
+    {% else %}
+    <title>Welcome to HPDF-Submission1</title>
+    {% endif %}
+  </head>
+  <body>
+    <div>Week1: <a href="/index">Home</a></div>
+    <hr>
+    {% block content %}{% endblock %}
+  </body>
+</html>

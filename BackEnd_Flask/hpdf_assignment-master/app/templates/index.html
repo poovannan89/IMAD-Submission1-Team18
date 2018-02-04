@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}  
+	<h3>Welcome - Please login to shopping </h3>  
+    <form action = "/login" method = "POST" name="form1">         
+         <p>Enter Name<input type = 'text' name = 'uname'/></p>         
+         <p>Enter Password <input type = 'password' name = 'upass'/></p>         
+         <p><input type = 'submit' value = 'Login'/></p>
+      </form>
+{% endblock %}

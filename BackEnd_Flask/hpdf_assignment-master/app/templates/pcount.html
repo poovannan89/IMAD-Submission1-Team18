@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}   
+<table>
+    <tr>
+    <th> Post Author </th>
+    <th> Post Count </th>    			
+    </tr>
+	{% for key,value in userpcount.items() %}
+	<tr>
+		<td> {{ key }} </td>
+		<td> {{ value }} </td>
+	</tr>
+	{% endfor %}
+</table>
+{% endblock %}

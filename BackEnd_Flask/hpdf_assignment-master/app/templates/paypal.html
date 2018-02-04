@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}    
+<p>Total cost<input type = 'number' name = 'total_cost' id='tcost' /></p>                  
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+<div id="paypal-button"></div>
+  <script>
+    paypal.Button.render({
+      env: 'sandbox', // Or 'sandbox',
+
+      commit: true, // Show a 'Pay Now' button
+
+      client: {
+      	sandbox: 'AQBhEyJ3eHxZjct02KmnC9tuItCtW9W1CLjNvUk-XJJPvQ-CcUEUcYMf_Hf7ladliImxa1o5RXdP7PZf'
+      },
+
+      style: {
+        color: 'gold',
+        size: 'small'
+      },
+
+      payment: function(data, actions) {
+        var input_amt = document.getElementById('tcost').value;        
+      	return actions.payment.create({
+      		payment: {
+      			transactions: [
+      				{
+      					amount: { total: input_amt, currency: 'INR'}	
+      				}
+      			]
+      		}
+      	});      
+      },
+
+      onAuthorize: function(data, actions) {
+      	return actions.payment.execute().then(function(){
+          console.log(payment);
+      		window.alert('Payment complete!');	
+      	});        
+      },
+
+      onCancel: function(data, actions) {
+        window.alert('Payment cancelled')
+      },
+
+      onError: function(err) {        
+      }
+    }, '#paypal-button');
+  </script>
+{% endblock %}

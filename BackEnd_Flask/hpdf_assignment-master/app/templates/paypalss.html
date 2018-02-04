@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+{% block content %}    
+Total Amount<input type="number" name="tamount" id='tcost' ><br>
+<link rel="stylesheet" href="/static/style.css" media="screen" title="no title" charset="utf-8">
+<script src="https://code.jquery.com/jquery-2.2.4.js" charset="utf-8"></script>
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+<div class="shopping-cart">
+      <!-- Title -->
+      <div class="title">
+        Shopping Bag
+      </div>
+
+      <!-- Product #1 -->      
+      <div class="item" id="item-1">
+        <div class="buttons">
+          <span class="delete-btn"></span>
+          <span class="like-btn"></span>
+        </div>
+
+        <div class="image">
+          <img src="/static/item-1.png" alt="" />
+        </div>
+
+        <div class="description">
+          <span>Common Projects</span>
+          <span>Bball High</span>
+          <span>White</span>
+        </div>
+
+        <div class="quantity">
+          <button class="plus-btn" type="button" name="button">
+            <img src="/static/plus.svg" alt="" />
+          </button>
+          <input type="number" name="name" value="1" id="item-1q">
+          <button class="minus-btn" type="button" name="button">
+            <img src="/static/minus.svg" alt="" />
+          </button>
+        </div>
+
+        <div class="total-price"><input type="number" name="name" value="549" id="item-1p"></div>
+      </div>
+
+      <!-- Product #2 -->
+      <div class="item" id="item-2">
+        <div class="buttons">
+          <span class="delete-btn"></span>
+          <span class="like-btn"></span>
+        </div>
+
+        <div class="image">
+          <img src="/static/item-2.png" alt=""/>
+        </div>
+
+        <div class="description">
+          <span>Maison Margiela</span>
+          <span>Future Sneakers</span>
+          <span>White</span>
+        </div>
+
+        <div class="quantity">
+          <button class="plus-btn" type="button" name="button">
+            <img src="/static/plus.svg" alt="" />
+          </button>
+          <input type="number" name="name" value="1" id="item-2q">
+          <button class="minus-btn" type="button" name="button">
+            <img src="/static/minus.svg" alt="" />
+          </button>
+        </div>
+
+        <div class="total-price"><input type="number" name="name" value="870" id="item-2p"></div>
+      </div>
+
+      <!-- Product #3 -->
+      <div class="item" id="item-3">
+        <div class="buttons">
+          <span class="delete-btn"></span>
+          <span class="like-btn"></span>
+        </div>
+
+        <div class="image">
+          <img src="/static/item-3.png" alt="" />
+        </div>
+
+        <div class="description">
+          <span>Our Legacy</span>
+          <span>Brushed Scarf</span>
+          <span>Brown</span>
+        </div>
+
+        <div class="quantity">
+          <button class="plus-btn" type="button" name="button">
+            <img src="/static/plus.svg" alt="" />
+          </button>
+          <input type="number" name="name" value="1" id="item-3q">
+          <button class="minus-btn" type="button" name="button">
+            <img src="/static/minus.svg" alt="" />
+          </button>
+        </div>
+
+        <div class="total-price"><input type="number" name="name" value="349" id="item-3p"></div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      $('.minus-btn').on('click', function(e) {
+            e.preventDefault();
+            var $this = $(this);
+            var $input = $this.closest('div').find('input');
+            var value = parseInt($input.val());
+
+            if (value > 1) {
+                value = value - 1;
+            } else {
+                value = 0;
+            }
+
+        $input.val(value);
+
+        });
+
+        $('.plus-btn').on('click', function(e) {
+            e.preventDefault();
+            var $this = $(this);
+            var $input = $this.closest('div').find('input');
+            var value = parseInt($input.val());
+
+            if (value < 100) {
+            value = value + 1;
+            } else {
+                value =100;
+            }
+
+            $input.val(value);
+        });
+
+      $('.like-btn').on('click', function() {
+        $(this).toggleClass('is-active');
+      });
+    </script>
+
+<div id="paypal-button"></div>
+<script>
+    var CREATE_PAYMENT_URL  = 'http://localhost:8080/payment';
+    var EXECUTE_PAYMENT_URL = 'http://localhost:8080/execute';    
+    paypal.Button.render({
+        env: 'sandbox', // Or 'sandbox'
+        commit: true, // Show a 'Pay Now' button        
+        payment: function() {            
+                return paypal.request.post(CREATE_PAYMENT_URL, {                
+                item1q: document.getElementById('item-1q').value,
+                item2q: document.getElementById('item-2q').value,            
+                item3q: document.getElementById('item-3q').value,            
+                item1p: document.getElementById('item-1p').value,            
+                item2p: document.getElementById('item-2p').value,            
+                item3p: document.getElementById('item-3p').value            
+                }).then(function(data) {
+                return data.paymentID;
+            });                
+        },
+        onAuthorize: function(data) {
+            return paypal.request.post(EXECUTE_PAYMENT_URL, {
+                paymentID: data.paymentID,
+                payerID:   data.payerID
+            }).then(function(res) {
+                console.log(res.success)
+                window.alert('Payment completed successfully')
+            });
+        }
+    }, '#paypal-button');
+</script>
+{% endblock %}

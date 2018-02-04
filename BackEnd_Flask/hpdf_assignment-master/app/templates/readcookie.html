@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+{% if cookie_exists == True %}
+	<p>Cookie is already set </p>
+	<div> <a href="/paymentss">Shop ur items here </a></div>
+{% else %}
+    <p>User ID and age is set as cookie</p>
+    <div> <a href="/paymentss">Shop ur items here </a></div>
+{% endif %}       
+{% endblock %} 
+

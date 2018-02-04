@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}    
+Total Amount<input type="number" name="tamount" id='tcost' ><br>
+<script>
+    var CREATE_PAYMENT_URL  = 'http://localhost:8080/payment';
+    var EXECUTE_PAYMENT_URL = 'http://localhost:8080/execute';    
+    paypal.Button.render({
+        env: 'sandbox', // Or 'sandbox'
+        commit: true, // Show a 'Pay Now' button        
+        payment: function() {            
+                return paypal.request.post(CREATE_PAYMENT_URL, {                
+                amount: document.getElementById('tcost').value                
+                }).then(function(data) {
+                return data.paymentID;
+            });                
+        },
+        onAuthorize: function(data) {
+            return paypal.request.post(EXECUTE_PAYMENT_URL, {
+                paymentID: data.paymentID,
+                payerID:   data.payerID
+            }).then(function(res) {
+                console.log(res.success)
+                window.alert('Payment completed successfully')
+            });
+        }
+    }, '#paypal-button');
+</script>
+{% endblock %}
